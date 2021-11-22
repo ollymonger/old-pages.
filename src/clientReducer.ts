@@ -1,6 +1,6 @@
 import { RootState } from './store';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Platform } from 'react-native';
+import { UAParser } from 'ua-parser-js';
 
 interface clientState {
     device: string;
@@ -15,7 +15,9 @@ export const clientSlice = createSlice({
     initialState,
     reducers: {
         setClient: (state) => {
-            state.device = Platform.OS;
+            let parser = new UAParser();
+            let result = parser.getResult();
+            state.device = result.device.type ? result.device.type : 'web';
         }
     }
 })
