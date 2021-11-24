@@ -4,6 +4,7 @@ import { styles } from "../App";
 import { setClient } from "./clientReducer";
 import { useAppDispatch, useAppSelector } from "./store";
 import { Route, Link } from 'react-router-native';
+import { LanguageSelect } from "./languageSelect";
 
 
 export const ClientTab = () => {
@@ -12,16 +13,16 @@ export const ClientTab = () => {
 
     useEffect(() => {
         dispatch(setClient());
-    })
+    });
 
     return (
-        <View style={styles.header}>
-            <View style={styles.navLeft}> 
+        < View style={styles.header} >
+            <View style={styles.navLeft}>
                 <Link to="/"><Text style={styles.headerTextColor}>yllo.cc</Text></Link>
             </View>
             <View style={styles.navRight}>
                 <Link to="/projects">
-                    <View style={{right:'50%'}}>
+                    <View style={{ right: '50%' }}>
                         <Text style={styles.headerTextColor}>PROJECTS</Text>
                     </View>
                 </Link>
@@ -30,7 +31,10 @@ export const ClientTab = () => {
                         <Text style={styles.headerTextColor}>CONTACT</Text>
                     </View>
                 </Link>
+                <View style={{ bottom: '25%' }}>
+                    <LanguageSelect />
+                </View>
             </View>
-        </View>
+        </View >
     )
 }
