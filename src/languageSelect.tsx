@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { View, Text } from "react-native";
 import { styles } from "../App";
-import { setClient, setLanguage } from "./clientReducer";
-import { useAppDispatch, useAppSelector } from "./store";
+import { setClient, setLanguage } from "./redux/clientReducer";
+import { useAppDispatch, useAppSelector } from "./redux/store";
 import { Route, Link } from 'react-router-native';
 import { Button, Menu, Divider, Provider } from 'react-native-paper';
 

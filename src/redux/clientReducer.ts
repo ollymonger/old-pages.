@@ -9,7 +9,7 @@ export interface clientState {
 
 const initialState: clientState = {
     device: 'null',
-    lang: 'english'
+    lang: 'en'
 }
 
 export const clientSlice = createSlice({
@@ -21,8 +21,14 @@ export const clientSlice = createSlice({
             let result = parser.getResult();
             state.device = result.device.type ? result.device.type : 'web';
         },
-        setLanguage: (state, action: PayloadAction<string>) => {
-            action.payload.toLowerCase() === 'english' ? state.lang = 'english' : state.lang = 'french';
+        setLanguage: (state) => {
+            if(window.navigator.language.indexOf('-') > 0){
+                // set state to only be first two characters of window.navigator.language
+                state.lang = window.navigator.language.substring(0, 2);
+            }
+            else{
+                state.lang = window.navigator.language;
+            }
         },
         getLanguage: (state) => {
             state.lang;

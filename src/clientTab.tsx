@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { View, Text, Button } from "react-native";
 import { styles } from "../App";
-import { setClient } from "./clientReducer";
-import { useAppDispatch, useAppSelector } from "./store";
+import { setClient, setLanguage } from "./redux/clientReducer";
+import { useAppDispatch, useAppSelector } from "./redux/store";
 import { Route, Link } from 'react-router-native';
 import { LanguageSelect } from "./languageSelect";
+import { MobileHeader } from "./components/MobileHeader";
 
 
 export const ClientTab = () => {
@@ -13,28 +14,30 @@ export const ClientTab = () => {
 
     useEffect(() => {
         dispatch(setClient());
+        dispatch(setLanguage());
     });
 
-    return (
-        < View style={styles.header} >
-            <View style={styles.navLeft}>
-                <Link to="/"><Text style={styles.headerTextColor}>yllo.cc</Text></Link>
-            </View>
-            <View style={styles.navRight}>
-                <Link to="/projects">
-                    <View style={{ right: '50%' }}>
-                        <Text style={styles.headerTextColor}>PROJECTS</Text>
-                    </View>
-                </Link>
-                <Link to="/contact">
-                    <View>
-                        <Text style={styles.headerTextColor}>CONTACT</Text>
-                    </View>
-                </Link>
-                <View style={{ bottom: '25%' }}>
-                    <LanguageSelect />
+    if(client.device === "mobile"){
+        return <MobileHeader/>
+    } else {
+        return (
+            <View style={styles.header} >
+                <View style={styles.navLeft}>
+                    <Link to="/"><Text style={styles.headerTextColor}>yllo.cc</Text></Link>
                 </View>
-            </View>
-        </View >
-    )
+                <View style={styles.navRight}>
+                    <Link to="/projects">
+                        <View style={{ right: '50%' }}>
+                            <Text style={styles.headerTextColor}>PROJECTS</Text>
+                        </View>
+                    </Link>
+                    <Link to="/contact">
+                        <View>
+                            <Text style={styles.headerTextColor}>CONTACT</Text>
+                        </View>
+                    </Link>
+                </View>
+            </View >
+        )
+    }
 }
