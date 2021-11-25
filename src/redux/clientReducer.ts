@@ -19,7 +19,7 @@ export const clientSlice = createSlice({
         setClient: (state) => {
             let parser = new UAParser();
             let result = parser.getResult();
-            state.device = result.device.type ? result.device.type : 'mobile';
+            state.device = result.device.type ? result.device.type : 'web';
         },
         setLanguage: (state) => {
             if(window.navigator.language.indexOf('-') > 0){
