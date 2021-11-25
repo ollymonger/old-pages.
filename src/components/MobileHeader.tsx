@@ -20,7 +20,7 @@ export const MobileHeader = () => {
                 <Text style={styles.headerTextColor}>yllo.cc</Text>
             </View>
             <View style={styles.navRight}>
-                <Menu visible={open} onDismiss={closeMenu} anchor={<Button onPress={openMenu} title="Menu"/>}>
+                <Menu visible={open} onDismiss={closeMenu} anchor={<Button onPress={openMenu} color="#B084CC" title="Menu"/>}>
                     <Menu.Item onPress={() => { navigate('/', { replace: true }); closeMenu(); }} title="Home"></Menu.Item>
                     <Divider />
                     <Menu.Item onPress={() => { navigate('/projects', { replace: true }); closeMenu(); }} title="Projects" />
