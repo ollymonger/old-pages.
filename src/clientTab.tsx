@@ -5,6 +5,7 @@ import { setClient, setLanguage } from "./redux/clientReducer";
 import { useAppDispatch, useAppSelector } from "./redux/store";
 import { Route, Link } from 'react-router-native';
 import { MobileHeader } from "./components/MobileHeader";
+import { WebHeader } from "./components/WebHeader";
 
 
 export const ClientTab = () => {
@@ -19,24 +20,6 @@ export const ClientTab = () => {
     if(client.device === "mobile"){
         return <MobileHeader/>
     } else {
-        return (
-            <View style={styles.header} >
-                <View style={styles.navLeft}>
-                    <Link to="/"><Text style={styles.headerTextColor}>yllo.cc</Text></Link>
-                </View>
-                <View style={styles.navRight}>
-                    <Link to="/projects">
-                        <View style={{ right: '50%' }}>
-                            <Text style={styles.headerTextColor}>PROJECTS</Text>
-                        </View>
-                    </Link>
-                    <Link to="/contact">
-                        <View>
-                            <Text style={styles.headerTextColor}>CONTACT</Text>
-                        </View>
-                    </Link>
-                </View>
-            </View >
-        )
+        return <WebHeader/>
     }
 }
