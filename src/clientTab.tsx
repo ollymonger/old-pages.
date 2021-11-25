@@ -4,7 +4,6 @@ import { styles } from "../App";
 import { setClient, setLanguage } from "./redux/clientReducer";
 import { useAppDispatch, useAppSelector } from "./redux/store";
 import { Route, Link } from 'react-router-native';
-import { LanguageSelect } from "./languageSelect";
 import { MobileHeader } from "./components/MobileHeader";
 
 
