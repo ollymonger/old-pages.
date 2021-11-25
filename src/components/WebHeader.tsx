@@ -12,6 +12,11 @@ export const WebHeader = () => {
                 <Link to="/"><Text style={styles.headerTextColor}>yllo.cc</Text></Link>
             </View>
             <View style={styles.navRight}>
+                <Link to="/">
+                    <View style={{ right:'175%' }}>
+                        <Text style={styles.headerTextColor}>HOME</Text>
+                    </View>
+                </Link>
                 <Link to="/projects">
                     <View style={{ right: '50%' }}>
                         <Text style={styles.headerTextColor}>PROJECTS</Text>

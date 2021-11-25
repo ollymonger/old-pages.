@@ -14,6 +14,9 @@ const WebHome = (client: clientState) => {
     <View style={styles.container}>
       <Text style={{ fontFamily: 'Inter_900Black', color: '#F7F7FF', fontSize: '400%' }}>{
         welcomeMsg.map(msg => { if(msg.lang === client.lang) { return msg.text }})}</Text>
+        <Text style={{ fontFamily: 'Inter_300Light', color: '#F7F7FF', fontSize: '100%', textAlign:'center' }}>
+          This looks pretty cool... right?
+        </Text>
     </View>
   );
 };
@@ -23,6 +26,9 @@ const MobHome = (client: clientState) => {
     <View style={styles.container}>
       <Text style={{ fontFamily: 'Inter_900Black', color: '#F7F7FF', fontSize: '300%' }}>{
         welcomeMsg.map(msg => { if(msg.lang === client.lang) { return msg.text }})}</Text>
+        <Text style={{ fontFamily: 'Inter_300Light', color: '#F7F7FF', fontSize: '75%', textAlign:'center' }}>
+          This looks pretty cool... right?
+          </Text>
     </View>
   );
 };

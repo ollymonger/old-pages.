@@ -5,14 +5,14 @@ import { Provider } from 'react-redux';
 import { ClientTab } from './src/clientTab';
 import { store } from './src/redux/store';
 import { Link, NativeRouter, Route, Routes } from 'react-router-native';
-import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
+import { useFonts, Inter_900Black, Inter_300Light } from '@expo-google-fonts/inter';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Home } from './src/components/Home';
 
 
 export default function App() {
   let [fontsLoaded] = useFonts({
-    Inter_900Black
+    Inter_900Black, Inter_300Light
   });
   return (
     <NativeRouter>

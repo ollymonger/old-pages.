@@ -17,7 +17,7 @@ export const MobileHeader = () => {
     return (
         <View style={styles.header}>
             <View style={styles.navLeft}>
-                <Text style={styles.headerTextColor}>yllo.cc</Text>
+                <Text style={styles.headerTextColor} >yllo.cc</Text>
             </View>
             <View style={styles.navRight}>
                 <Menu visible={open} onDismiss={closeMenu} anchor={<Button onPress={openMenu} color="#B084CC" title="Menu"/>}>
