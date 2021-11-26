@@ -28,6 +28,16 @@ const secondaryMsg = [{ lang: "en", text: "This website is also available on all
 const languageButtonText = [{ lang: "en", text: "Randomise Language" }, { lang: "es", text: "Idioma aleatorio" }, { lang: "fr", text: "Langue aléatoire" }, { lang: "de", text: "Zufällige Sprache" }, { lang: "it", text: "Lingua casuale" }, { lang: "ru", text: "Случайный язык" }, { lang: "zh", text: "随机语言" }, { lang: "ja", text: "ランダムな言語" }];
 
 const WebHome = (client: clientState) => {
+  const dispatch = useAppDispatch();
+  const setLang = () => {
+    // pick random from array
+    const languages = ["en", "es", "fr", "de", "it", "ru", "zh", "ja"];
+    const random = Math.floor(Math.random() * languages.length);
+    console.log("attempting to set to: " + languages[random]);
+    dispatch(setSpecificLang(languages[random]));
+  }
+  let selected = languageButtonText.map(lang => { if (lang.lang === client.lang) { return lang.text } });
+
   return (
     <View style={styles.container}>
       <Text style={{ fontFamily: 'Inter_900Black', color: '#F7F7FF', fontSize: '400%', width: '95%' }}>{
@@ -38,6 +48,7 @@ const WebHome = (client: clientState) => {
       <Text style={{ fontFamily: 'Inter_300Light', color: '#F7F7FF', fontSize: '75%', width: '45%' }}>
         {secondaryMsg.map(msg => { if (msg.lang === client.lang) { return msg.text } })}
       </Text>
+      <View style={{width: '50%', paddingTop:'5%'}}><Button onPress={setLang} title={selected.toString()} color="#B084CC" /></View>
     </View>
   );
 };
@@ -63,7 +74,7 @@ const MobHome = (client: clientState) => {
       <Text style={{ fontFamily: 'Inter_300Light', color: '#F7F7FF', fontSize: '75%', width: '70%' }}>
         {secondaryMsg.map(msg => { if (msg.lang === client.lang) { return msg.text } })}
       </Text>
-      <Button onPress={setLang} title={selected.toString()} />
+      <View style={{width: '70%', paddingTop:'5%'}}><Button onPress={setLang} title={selected.toString()} color="#B084CC" /></View>
     </View>
   );
 };

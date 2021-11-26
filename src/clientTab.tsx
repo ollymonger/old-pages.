@@ -15,7 +15,7 @@ export const ClientTab = () => {
     useEffect(() => {
         dispatch(setClient());
         dispatch(setLanguage());
-    });
+    },[]);
 
     if(client.device === "mobile"){
         return <MobileHeader/>
