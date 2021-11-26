@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { View, Text, Button } from "react-native";
 import { styles } from "../../App";
-import { Route, Link } from 'react-router-native';
+import { Route, Link, Navigate } from 'react-router-native';
 import { useAppSelector } from "../redux/store";
 import { clientState } from "../redux/clientReducer";
 
@@ -32,11 +32,12 @@ export const WebHeader = () => {
                     })}</Text>
                     </View>
                 </Link>
-                <Link to="/projects">
+                <Link to="/projects">             
                     <View style={{ right: '50%' }}>
-                        <Text style={styles.headerTextColor}>{menuItemsInLanguages.map(lang => {
-                        if(lang.lang === client.lang){ return lang.projects.toString(); }
-                    })}</Text>
+                        <Text style={styles.headerTextColor}>
+                        {menuItemsInLanguages.map(lang => {
+                        if(client.lang === lang.lang) return lang.projects.toString(); })}
+                        </Text>
                     </View>
                 </Link>
                 <Link to="/contact">
