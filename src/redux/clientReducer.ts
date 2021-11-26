@@ -22,11 +22,11 @@ export const clientSlice = createSlice({
             state.device = result.device.type ? result.device.type : 'web';
         },
         setLanguage: (state) => {
-            if(window.navigator.language.indexOf('-') > 0){
+            if (window.navigator.language.indexOf('-') > 0) {
                 // set state to only be first two characters of window.navigator.language
                 state.lang = window.navigator.language.substring(0, 2);
             }
-            else{
+            else {
                 state.lang = window.navigator.language;
             }
         },

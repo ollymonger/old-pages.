@@ -1,32 +1,61 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect } from 'react';
-import { ImageBackground, StyleSheet, Text, View, Image } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { ImageBackground, StyleSheet, Text, View, Image, ProgressBarAndroidBase, Animated } from 'react-native';
 import { Provider } from 'react-redux';
 import { ClientTab } from './src/clientTab';
 import { store } from './src/redux/store';
 import { Link, NativeRouter, Route, Routes } from 'react-router-native';
 import { useFonts, Inter_900Black, Inter_300Light } from '@expo-google-fonts/inter';
-import { Provider as PaperProvider } from 'react-native-paper';
+import { ProgressBar, Provider as PaperProvider } from 'react-native-paper';
+import AnimatedProgressWheel from 'react-native-progress-wheel';
+
 import { Home } from './src/components/Home';
 
 
 export default function App() {
+
   let [fontsLoaded] = useFonts({
     Inter_900Black, Inter_300Light
   });
+
+  let [fakeLoad, setFakeLoad] = React.useState(false);
+
+  useEffect(() => {
+    if (fontsLoaded) {
+      setTimeout(() => {
+        setFakeLoad(true);
+      }, 1000);
+    }
+  }, [fontsLoaded]);
+
   return (
     <NativeRouter>
       <Provider store={store}>
         <PaperProvider>
           <View style={styles.app}>
-            <View style={styles.header}>
-              <ClientTab />
-            </View>
-            <Routes>
-              <Route exact path="/" element={
-                <Home/>
-              } />
-            </Routes>
+            {fakeLoad ? (
+              <>
+                <View style={styles.header}>
+                  <ClientTab />
+                </View>
+                <Routes>
+                  <Route exact path="/" element={<Home />} />
+                </Routes>
+              </>
+            ) : (
+              <View style={styles.container}>
+                <AnimatedProgressWheel
+                  size={300}
+                  width={20}
+                  progress={100}
+                  animateFromValue={0}
+                  duration={1000}
+                  backgroundColor={'purple'}
+                  color={'blue'}
+                />
+                <Text style={styles.headerTextColor}>Loading site...</Text>
+              </View>
+            )}
           </View>
         </PaperProvider>
       </Provider>
