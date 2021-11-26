@@ -30,13 +30,16 @@ export const clientSlice = createSlice({
                 state.lang = window.navigator.language;
             }
         },
+        setSpecificLang: (state, action: PayloadAction<string>) => {
+            state.lang = action.payload;
+        },
         getLanguage: (state) => {
             state.lang;
         }
     }
 })
 
-export const { setClient, setLanguage, getLanguage } = clientSlice.actions;
+export const { setClient, setLanguage, setSpecificLang, getLanguage } = clientSlice.actions;
 export const getClient = (state: clientState) => state;
 
 export default clientSlice.reducer;
