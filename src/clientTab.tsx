@@ -12,8 +12,8 @@ export const ClientTab = () => {
     const dispatch = useAppDispatch();
     const [screenSize, _setScreenSize] = React.useState({ width: 0, height: 0 });
 
-    setLanguage();
-    setClient();
+    dispatch(setLanguage());
+    dispatch(setClient());
 
     const handleWindowResize = useCallback(e =>{
         _setScreenSize({ width: window.innerWidth, height: window.innerHeight });
