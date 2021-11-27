@@ -95,14 +95,20 @@ export const Home = () => {
 
   const dispatch = useAppDispatch();
   const client: clientState = useAppSelector(state => state.client);
+  console.log(client.width);
   if (client.device == "mobile") return (
     <Animated.View style={[{ opacity: fadeAnim }]}>
       {MobHome(client)}
     </Animated.View>
   );
-  else return (
+  else if(client.height > 500 && client.width > 600) return (
     <Animated.View style={[{ opacity: fadeAnim }]}>
       {WebHome(client)}
+    </Animated.View>
+  );
+  else return (
+    <Animated.View style={[{ opacity: fadeAnim }]}>
+      {MobHome(client)}
     </Animated.View>
   );
 }

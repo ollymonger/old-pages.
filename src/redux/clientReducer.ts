@@ -7,11 +7,15 @@ import { FC } from 'react';
 export interface clientState {
     device: string;
     lang: string;
+    width: number;
+    height: number;
 }
 
 const initialState: clientState = {
     device: 'null',
     lang: 'en',
+    width: 601,
+    height: 501
 }
 
 export const clientSlice = createSlice({
@@ -22,6 +26,10 @@ export const clientSlice = createSlice({
             let parser = new UAParser();
             let result = parser.getResult();
             state.device = result.device.type ? result.device.type : 'web';
+        },
+        setScreenSize: (state, action: PayloadAction<{ width: number, height: number }>) => {
+            state.width = action.payload.width;
+            state.height = action.payload.height;
         },
         getState: (state) => {
             return state;
@@ -44,7 +52,7 @@ export const clientSlice = createSlice({
     }
 })
 
-export const { setClient, setLanguage, setSpecificLang, getLanguage } = clientSlice.actions;
+export const { setClient, setLanguage, setSpecificLang, getLanguage, setScreenSize } = clientSlice.actions;
 export const getClient = (state: clientState) => state;
 
 export default clientSlice.reducer;
