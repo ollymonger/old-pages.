@@ -15,7 +15,7 @@ const initialState: clientState = {
     device: 'null',
     lang: 'en',
     width: 601,
-    height: 501
+    height: 601
 }
 
 export const clientSlice = createSlice({

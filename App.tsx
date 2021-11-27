@@ -95,7 +95,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 2,
     paddingLeft: '10%',
-    paddingTop: '10%',
+    paddingTop: '5%',
     paddingRight: '10%',
     alignSelf: 'center'
   }

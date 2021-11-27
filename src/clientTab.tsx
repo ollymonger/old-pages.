@@ -30,7 +30,7 @@ export const ClientTab = () => {
 
     if(client.device === "mobile"){
         return <MobileHeader/>
-    } else if(client.height > 500 && client.width > 600){
+    } else if(client.height > 600 && client.width > 600){
         return <WebHeader/>
     } else {
         return <MobileHeader/>
