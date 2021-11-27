@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { View, Text, Button } from "react-native";
 import { styles } from "../../App";
-import { Route, Link, Navigate } from 'react-router-native';
+import { Route, Link } from 'react-router-native';
 import { useAppSelector } from "../redux/store";
 import { clientState } from "../redux/clientReducer";
 
@@ -17,6 +17,9 @@ const menuItemsInLanguages = [{lang:"en", menu: "MENU", home: "HOME", projects: 
 
 export const WebHeader = () => {
     const client: clientState = useAppSelector(state => state.client);
+    
+    // select menu item in current language
+    let menuItems = menuItemsInLanguages.find(item => item.lang === client.lang);
 
     return (
 
@@ -25,28 +28,15 @@ export const WebHeader = () => {
                 <Link to="/"><Text style={styles.headerTextColor}>yllo.cc</Text></Link>
             </View>
             <View style={styles.navRight}>
-                <Link to="/">
-                    <View style={{ right:'175%' }}>
-                        <Text style={styles.headerTextColor}>{menuItemsInLanguages.map(lang => {
-                        if(lang.lang === client.lang){ return lang.home.toString(); }
-                    })}</Text>
+                    <View style={{ paddingRight: '5%' }}>
+                        <Link to="/"><Text style={styles.headerTextColor}>{menuItems.home}</Text></Link>
+                    </View>        
+                    <View style={{ paddingRight:'5%' }}>
+                        <Link to="/projects"><Text style={styles.headerTextColor}>{menuItems.projects}</Text></Link>
                     </View>
-                </Link>
-                <Link to="/projects">             
-                    <View style={{ right: '50%' }}>
-                        <Text style={styles.headerTextColor}>
-                        {menuItemsInLanguages.map(lang => {
-                        if(client.lang === lang.lang) return lang.projects.toString(); })}
-                        </Text>
-                    </View>
-                </Link>
-                <Link to="/contact">
                     <View>
-                        <Text style={styles.headerTextColor}>{menuItemsInLanguages.map(lang => {
-                        if(lang.lang === client.lang){ return lang.contact.toString(); }
-                    })}</Text>
+                        <Link to="/contact"><Text style={styles.headerTextColor}>{menuItems.contact}</Text></Link>
                     </View>
-                </Link>
             </View>
         </View >
     )

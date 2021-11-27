@@ -3,7 +3,7 @@ import { View, Text, Button } from "react-native";
 import { styles } from "../App";
 import { setClient, setLanguage } from "./redux/clientReducer";
 import { useAppDispatch, useAppSelector } from "./redux/store";
-import { Route, Link } from 'react-router-native';
+import { Route, Link, useNavigate } from 'react-router-native';
 import { MobileHeader } from "./components/MobileHeader";
 import { WebHeader } from "./components/WebHeader";
 

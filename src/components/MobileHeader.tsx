@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { View, Text, Button, Linking } from "react-native";
 import { Divider, Menu } from "react-native-paper";
-import { Route, Link, Navigate, useNavigate } from 'react-router-native';
+import { useNavigate } from "react-router";
 
 import { styles } from "../../App";
 import { clientState, setClient, setLanguage } from "../redux/clientReducer";
@@ -23,7 +23,10 @@ export const MobileHeader = () => {
 
     const openMenu = () => setOpen(true);
     const closeMenu = () => setOpen(false);
-    const navigate = useNavigate();
+
+    let navigator = useNavigate();
+
+    let menuItems = menuItemsInLanguages.find(item => item.lang === client.lang);
 
     return (
         <View style={styles.header}>
@@ -31,20 +34,14 @@ export const MobileHeader = () => {
                 <Text style={styles.headerTextColor} >yllo.cc</Text>
             </View>
             <View style={styles.navRight}>
-                <Menu visible={open} onDismiss={closeMenu} anchor={<Button onPress={openMenu} color="#B084CC" title={menuItemsInLanguages.map(lang => {
-                        if(lang.lang === client.lang){ return lang.menu.toString(); }
-                    })} />}>
-                    <Menu.Item onPress={() => { navigate('/', { replace: true }); closeMenu(); }} title={menuItemsInLanguages.map(lang => {
-                        if(lang.lang === client.lang){ return lang.home; }
-                    })}></Menu.Item>
+                <Menu visible={open} onDismiss={closeMenu} anchor={<Button onPress={openMenu} color="#B084CC" title={menuItems.menu} />}>
+                    <Menu.Item onPress={() => { navigator('/', { replace: true }); closeMenu(); }} title={menuItems.home}></Menu.Item>
                     <Divider />
-                    <Menu.Item onPress={() => { navigate('/projects', { replace: true }); closeMenu(); }} title={menuItemsInLanguages.map(lang => {
+                    <Menu.Item onPress={() => { navigator('/projects', { replace: true }); closeMenu(); }} title={menuItemsInLanguages.map(lang => {
                         if(lang.lang === client.lang){ return lang.projects; }
                     })} />
                     <Divider />
-                    <Menu.Item onPress={() => { navigate('/contact', { replace: true }); closeMenu(); }} title={menuItemsInLanguages.map(lang => {
-                        if(lang.lang === client.lang){ return lang.contact; }
-                    })} />
+                    <Menu.Item onPress={() => { navigator('/contact', { replace: true }); closeMenu(); }} title={menuItems.contact} />
                 </Menu>
             </View>
         </View>

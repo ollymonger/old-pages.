@@ -35,7 +35,7 @@ export default function App() {
           <View style={styles.app}>
             {fakeLoad ? (
               <>
-                <View style={styles.header}>
+                <View style={{}}>
                   <ClientTab />
                 </View>
                 <Routes>

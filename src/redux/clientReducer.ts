@@ -1,6 +1,8 @@
 import { RootState } from './store';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UAParser } from 'ua-parser-js';
+import { Navigate, useNavigate } from 'react-router';
+import { FC } from 'react';
 
 export interface clientState {
     device: string;
@@ -9,7 +11,7 @@ export interface clientState {
 
 const initialState: clientState = {
     device: 'null',
-    lang: 'en'
+    lang: 'en',
 }
 
 export const clientSlice = createSlice({
@@ -20,6 +22,9 @@ export const clientSlice = createSlice({
             let parser = new UAParser();
             let result = parser.getResult();
             state.device = result.device.type ? result.device.type : 'web';
+        },
+        getState: (state) => {
+            return state;
         },
         setLanguage: (state) => {
             if (window.navigator.language.indexOf('-') > 0) {
