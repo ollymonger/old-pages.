@@ -14,8 +14,8 @@ export interface clientState {
 const initialState: clientState = {
     device: 'null',
     lang: 'en',
-    width: 601,
-    height: 601
+    width: window.innerWidth,
+    height: window.innerHeight
 }
 
 export const clientSlice = createSlice({
