@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { View, Text, Animated, SafeAreaView, Button } from "react-native";
-import App, { styles } from "../../App";
+import { View, Text, Animated, Image, Button } from "react-native";
+import App, { mobileimage, styles } from "../../App";
 import { clientState, setLanguage, setSpecificLang } from "../redux/clientReducer";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 
@@ -36,6 +36,7 @@ const lastMsg = [{ lang: "en", text: "Have a project, or an idea? Feel free to c
 
 const languageButtonText = [{ lang: "en", text: "Randomise Language" }, { lang: "es", text: "Idioma aleatorio" }, { lang: "fr", text: "Langue aléatoire" }, { lang: "de", text: "Zufällige Sprache" }, { lang: "it", text: "Lingua casuale" }, { lang: "ru", text: "Случайный язык" }, { lang: "zh", text: "随机语言" }, { lang: "ja", text: "ランダムな言語" }];
 
+
 const WebHome = (client: clientState) => {
   const dispatch = useAppDispatch();
   const setLang = () => {
@@ -48,6 +49,7 @@ const WebHome = (client: clientState) => {
   let selected = languageButtonText.map(lang => { if (lang.lang === client.lang) { return lang.text } });
 
   let fontsize = { primary: client.lang === "zh" || client.lang === "ja" ? "325%" : "400%", dev: client.lang === "zh" || client.lang === "ja" ? "100%" : "100%", secondary: client.lang === "zh" || client.lang === "ja" ? "74%" : "75%" };
+
 
   return (
     <View style={styles.container}>
@@ -80,15 +82,25 @@ const MobHome = (client: clientState) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontFamily: 'Inter_900Black', color: '#F7F7FF', fontSize: "225%" }}>{
+      <Text style={{ fontFamily: 'Inter_900Black', color: '#F7F7FF', fontSize: client.lang === "ja" ? "200%" : "250%" }}>{
         welcomeMsg.map(msg => { if (msg.lang === client.lang) { return msg.text } })}</Text>
-      <Text style={{ fontFamily: 'Inter_300Light', color: '#F7F7FF', fontSize: '70%', width: '95%' }}>
+        
+      <View>
+        <Image style={{opacity:0.1, position:'absolute',
+          width: window.innerWidth / 1.25, height: window.innerHeight / 1.25,
+          resizeMode: 'contain', marginTop:'-20%'}}
+          blurRadius={1.5}
+          borderRadius={10}
+          source={mobileimage}
+        />
+      </View>
+      <Text style={{ fontFamily: 'Inter_300Light', color: '#F7F7FF', fontSize: client.lang === "ja" ? "75%" : "80%", width: '95%' }}>
         {developerMessage.map(msg => { if (msg.lang === client.lang) { return msg.text } })}
       </Text>
-      <Text style={{ fontFamily: 'Inter_300Light', color: '#F7F7FF', fontSize: '70%', width: '95%' }}>
+      <Text style={{ fontFamily: 'Inter_300Light', color: '#F7F7FF', fontSize: client.lang === "ja" ? "75%" : "80%", width: '95%' }}>
         {secondaryMsg.map(msg => { if (msg.lang === client.lang) { return msg.text } })}
       </Text>      
-      <Text style={{ fontFamily: 'Inter_300Light', color: '#F7F7FF', fontSize: '70%', width: '95%', paddingTop:'1%' }}>
+      <Text style={{ fontFamily: 'Inter_300Light', color: '#F7F7FF', fontSize: client.lang === "ja" ? "75%" : "80%", width: '95%', paddingTop:'1%' }}>
         {lastMsg.map(msg => { if (msg.lang === client.lang) { return msg.text } })}
       </Text>
       <View style={{width: '70%', paddingTop:'5%'}}><Button onPress={setLang} title={selected.toString()} color="#B084CC" /></View>
@@ -106,7 +118,7 @@ export const Home = () => {
   const fadeIn = () => {
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 150
+      duration: 500
     }).start();
   };
 
@@ -118,7 +130,7 @@ export const Home = () => {
       {MobHome(client)}
     </Animated.View>
   );
-  else if(client.height > 600 && client.width > 600) return (
+  else if(client.height > 640 && client.width > 640) return (
     <Animated.View style={[{ opacity: fadeAnim }]}>
       {WebHome(client)}
     </Animated.View>

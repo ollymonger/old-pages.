@@ -11,6 +11,8 @@ import AnimatedProgressWheel from 'react-native-progress-wheel';
 
 import { Home } from './src/components/Home';
 
+export const mobileimage = require('./desktop.png');
+
 
 export default function App() {
 
