@@ -3,19 +3,19 @@ import React, { useEffect, useRef } from 'react';
 import { ImageBackground, StyleSheet, Text, View, Image, ProgressBarAndroidBase, Animated } from 'react-native';
 import { Provider } from 'react-redux';
 import { ClientTab } from './src/clientTab';
-import { store } from './src/redux/store';
+import { store, useAppDispatch } from './src/redux/store';
 import { Link, NativeRouter, Route, Routes } from 'react-router-native';
 import { useFonts, Inter_900Black, Inter_300Light } from '@expo-google-fonts/inter';
 import { ProgressBar, Provider as PaperProvider } from 'react-native-paper';
 import AnimatedProgressWheel from 'react-native-progress-wheel';
 
 import { Home } from './src/components/Home';
+import { setClient, setLanguage } from './src/redux/clientReducer';
 
 export const mobileimage = require('./desktop.png');
 
 
 export default function App() {
-
   let [fontsLoaded] = useFonts({
     Inter_900Black, Inter_300Light
   });
