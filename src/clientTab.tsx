@@ -17,9 +17,7 @@ export const ClientTab = () => {
         _setScreenSize({ width: window.innerWidth, height: window.innerHeight });
         dispatch(setScreenSize({ width: window.innerWidth, height: window.innerHeight }));
     },[]);
-
-
-
+    
     useEffect(() => {
         window.addEventListener("resize", handleWindowResize);
         return () => {
@@ -30,7 +28,7 @@ export const ClientTab = () => {
 
     if(client.device === "mobile"){
         return <MobileHeader/>
-    } else if(client.height > 640 && client.width > 640){
+    } else if(client.height > 600 && client.width > 640){
         return <WebHeader/>
     } else {
         return <MobileHeader/>

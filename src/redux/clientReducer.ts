@@ -3,19 +3,22 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UAParser } from 'ua-parser-js';
 import { Navigate, useNavigate } from 'react-router';
 import { FC } from 'react';
+import { GitReposData } from '../models/gitReposData';
 
 export interface clientState {
     device: string;
     lang: string;
     width: number;
     height: number;
+    githubRepos: [];
 }
 
 const initialState: clientState = {
     device: 'null',
     lang: 'en',
     width: window.innerWidth,
-    height: window.innerHeight
+    height: window.innerHeight,
+    githubRepos: []
 }
 
 export const clientSlice = createSlice({
@@ -30,6 +33,9 @@ export const clientSlice = createSlice({
         setScreenSize: (state, action: PayloadAction<{ width: number, height: number }>) => {
             state.width = action.payload.width;
             state.height = action.payload.height;
+        },
+        getGithubRepos: (state) => {
+
         },
         getState: (state) => {
             return state;
@@ -52,7 +58,7 @@ export const clientSlice = createSlice({
     }
 })
 
-export const { setClient, setLanguage, setSpecificLang, getLanguage, setScreenSize } = clientSlice.actions;
+export const { setClient, setLanguage, setSpecificLang, getLanguage, setScreenSize, getGithubRepos } = clientSlice.actions;
 export const getClient = (state: clientState) => state;
 
 export default clientSlice.reducer;
