@@ -10,7 +10,6 @@ import { ProgressBar, Provider as PaperProvider } from 'react-native-paper';
 import AnimatedProgressWheel from 'react-native-progress-wheel';
 
 import { Home } from './src/components/Home';
-import { setClient, setLanguage } from './src/redux/clientReducer';
 
 export const mobileimage = require('./desktop.png');
 

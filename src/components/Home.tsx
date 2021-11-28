@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { View, Text, Animated, Image, Button } from "react-native";
 import App, { mobileimage, styles } from "../../App";
 import { GitReposData } from "../models/gitReposData";
-import { clientState, getGithubRepos, setSpecificLang } from "../redux/clientReducer";
+import { clientState, setSpecificLang } from "../redux/clientReducer";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 
 /* -- Data -- */
@@ -11,6 +11,7 @@ import { languageButtonText } from "../data/home/languageButtonText";
 import { lastMsg } from "../data/home/lastMsg";
 import { secondaryMsg } from "../data/home/secondaryMsg";
 import { welcomeMsg } from "../data/home/welcomeMsg";
+import { GitRepo } from "./GitRepo";
 
 const WebHome = (client: clientState) => {
   const dispatch = useAppDispatch();
@@ -33,8 +34,8 @@ const WebHome = (client: clientState) => {
       <Text style={{ fontFamily: 'Inter_300Light', color: '#F7F7FF', fontSize: fontsize.dev, width: '45%' }}>
         {developerMessage.map(msg => { if (msg.lang === client.lang) { return msg.text } })}
       </Text>
-      <View style={{position:'absolute',marginTop:'5%',marginLeft:'45%', width:'35%', height: '50%',borderRadius:'2.5%', backgroundColor:'#fff'}}>
-          <Text>hi</Text>
+      <View style={{position:'absolute',marginTop:'10%',marginLeft:'45%', width:'35%', height: '50%',borderRadius:'2.5%', backgroundColor:'#fff'}}>
+          {client.githubRepos.length > 1 ? <View style={{width:'50%', height:'50%'}}>{client.githubRepos.map(repo => repo.stars >= 1 ? <GitRepo {...repo}/> : null)}</View> : <Text>Loading repos...</Text>}
       </View>
       <Text style={{ fontFamily: 'Inter_300Light', color: '#F7F7FF', fontSize: fontsize.secondary, width: '45%' }}>
         {secondaryMsg.map(msg => { if (msg.lang === client.lang) { return msg.text } })}

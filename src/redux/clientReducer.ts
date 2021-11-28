@@ -10,7 +10,7 @@ export interface clientState {
     lang: string;
     width: number;
     height: number;
-    githubRepos: [];
+    githubRepos: GitReposData[];
 }
 
 const initialState: clientState = {
@@ -34,8 +34,8 @@ export const clientSlice = createSlice({
             state.width = action.payload.width;
             state.height = action.payload.height;
         },
-        getGithubRepos: (state) => {
-
+        addGithubRepos: (state, action: PayloadAction<GitReposData>) => {
+            state.githubRepos = [...state.githubRepos, action.payload];
         },
         getState: (state) => {
             return state;
@@ -58,7 +58,7 @@ export const clientSlice = createSlice({
     }
 })
 
-export const { setClient, setLanguage, setSpecificLang, getLanguage, setScreenSize, getGithubRepos } = clientSlice.actions;
+export const { setClient, setLanguage, setSpecificLang, getLanguage, setScreenSize, addGithubRepos } = clientSlice.actions;
 export const getClient = (state: clientState) => state;
 
 export default clientSlice.reducer;
