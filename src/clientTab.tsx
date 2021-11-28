@@ -3,8 +3,8 @@ import { View, Text, Button } from "react-native";
 import { styles } from "../App";
 import { addGithubRepos, setClient, setLanguage, setScreenSize } from "./redux/clientReducer";
 import { useAppDispatch, useAppSelector } from "./redux/store";
-import { MobileHeader } from "./components/MobileHeader";
-import { WebHeader } from "./components/WebHeader";
+import { MobileHeader } from "./components/headers/MobileHeader";
+import { WebHeader } from "./components/headers/WebHeader";
 import { GitReposData } from "./models/gitReposData";
 
 

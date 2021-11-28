@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, Text, Animated, Image, Button } from "react-native";
-import App, { mobileimage, styles } from "../../App";
-import { GitReposData } from "../models/gitReposData";
-import { clientState, setSpecificLang } from "../redux/clientReducer";
-import { useAppDispatch, useAppSelector } from "../redux/store";
+import App, { mobileimage, styles } from "../../../App";
+import { GitReposData } from "../../models/gitReposData";
+import { clientState, setSpecificLang } from "../../redux/clientReducer";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 
 /* -- Data -- */
-import { developerMessage } from "../data/home/developerMessage";
-import { languageButtonText } from "../data/home/languageButtonText";
-import { lastMsg } from "../data/home/lastMsg";
-import { secondaryMsg } from "../data/home/secondaryMsg";
-import { welcomeMsg } from "../data/home/welcomeMsg";
+import { developerMessage } from "../../data/home/developerMessage";
+import { languageButtonText } from "../../data/home/languageButtonText";
+import { lastMsg } from "../../data/home/lastMsg";
+import { secondaryMsg } from "../../data/home/secondaryMsg";
+import { welcomeMsg } from "../../data/home/welcomeMsg";
 import { GitRepo } from "./GitRepo";
 
 const WebHome = (client: clientState) => {

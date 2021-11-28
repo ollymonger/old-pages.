@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, Text, Animated, Image, Button, TouchableOpacity, Linking } from "react-native";
-import App, { mobileimage, styles } from "../../App";
-import { GitReposData } from "../models/gitReposData";
+import App, { mobileimage, styles } from "../../../App";
+import { GitReposData } from "../../models/gitReposData";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 

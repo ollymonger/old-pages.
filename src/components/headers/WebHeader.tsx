@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { View, Text, Button } from "react-native";
-import { styles } from "../../App";
+import { styles } from "../../../App";
 import { Route, Link } from 'react-router-native';
-import { useAppSelector } from "../redux/store";
-import { clientState } from "../redux/clientReducer";
-import { menuItemsInLanguages } from "../data/header/menuItemsInLanguage";
+import { useAppSelector } from "../../redux/store";
+import { clientState } from "../../redux/clientReducer";
+import { menuItemsInLanguages } from "../../data/header/menuItemsInLanguage";
 
 export const WebHeader = () => {
     const client: clientState = useAppSelector(state => state.client);

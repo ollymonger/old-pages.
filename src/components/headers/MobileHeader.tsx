@@ -3,10 +3,10 @@ import { View, Text, Button, Linking } from "react-native";
 import { Divider, Menu } from "react-native-paper";
 import { useNavigate } from "react-router";
 
-import { styles } from "../../App";
-import { menuItemsInLanguages } from "../data/header/menuItemsInLanguage";
-import { clientState, setClient, setLanguage } from "../redux/clientReducer";
-import { useAppDispatch, useAppSelector } from "../redux/store";
+import { styles } from "../../../App";
+import { menuItemsInLanguages } from "../../data/header/menuItemsInLanguage";
+import { clientState, setClient, setLanguage } from "../../redux/clientReducer";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 
 export const MobileHeader = () => {
     const [open, setOpen] = React.useState(false);

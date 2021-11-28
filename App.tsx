@@ -9,7 +9,7 @@ import { useFonts, Inter_900Black, Inter_300Light } from '@expo-google-fonts/int
 import { ProgressBar, Provider as PaperProvider } from 'react-native-paper';
 import AnimatedProgressWheel from 'react-native-progress-wheel';
 
-import { Home } from './src/components/Home';
+import { Home } from './src/components/apps/Home';
 
 export const mobileimage = require('./desktop.png');
 
