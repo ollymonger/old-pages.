@@ -7,7 +7,7 @@ import { store, useAppDispatch } from './src/redux/store';
 import { Link, NativeRouter, Route, Routes } from 'react-router-native';
 import { useFonts, Inter_900Black, Inter_300Light } from '@expo-google-fonts/inter';
 import { ProgressBar, Provider as PaperProvider } from 'react-native-paper';
-import AnimatedProgressWheel from 'react-native-progress-wheel';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 import { Home } from './src/components/apps/Home';
 
@@ -21,42 +21,47 @@ export default function App() {
 
   let [fakeLoad, setFakeLoad] = React.useState(false);
 
-  useEffect(() => {
-    if (fontsLoaded) {
-      setTimeout(() => {
-        setFakeLoad(true);
-      }, 1000);
-    }
-  }, [fontsLoaded]);
-
   return (
     <NativeRouter>
       <Provider store={store}>
         <PaperProvider>
           <View style={styles.app}>
-            {fakeLoad ? (
-              <>
-                <View style={{}}>
+            {fakeLoad ?     
+              <View style={{}}>
                   <ClientTab />
+              </View> :
+              <></>
+            }
+            <View>
+              {fakeLoad ? (  
+                <View style={styles.loadedContainer}>
+                  <Routes>
+                  </Routes>
                 </View>
-                <Routes>
-                  <Route exact path="/" element={<Home />} />
-                </Routes>
-              </>
-            ) : (
-              <View style={styles.container}>
-                <AnimatedProgressWheel
-                  size={300}
-                  width={20}
-                  progress={100}
-                  animateFromValue={0}
-                  duration={1000}
-                  backgroundColor={'purple'}
-                  color={'blue'}
-                />
-                <Text style={styles.headerTextColor}>Loading site...</Text>
-              </View>
-            )}
+                ) : (
+                <View style={styles.loadingContainer}>
+                  <AnimatedCircularProgress
+                    size={200}
+                    width={10}
+                    fill={100}
+                    rotation={0}
+                    duration={700}
+                    tintColor="#B084CC"
+                    backgroundColor="purple"
+                    onAnimationComplete={() => setFakeLoad(true)}
+                  >
+                    {
+                      (fill) => (                        
+                        <Text style={styles.loadingText}>{
+                          fill >= 95 ? 'LOADED'  : Math.round(fill) + '%'
+                        }</Text>
+                      )
+                    }
+                  </AnimatedCircularProgress>
+                </View>
+                )}
+            </View>
+
           </View>
         </PaperProvider>
       </Provider>
@@ -93,11 +98,18 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     color: '#F7F7FF'
   },
-  container: {
+  loadingContainer:{
     flex: 2,
-    paddingLeft: '10%',
-    paddingTop: '5%',
-    paddingRight: '10%',
-    alignSelf: 'center'
+    paddingLeft: '23vw',
+    paddingTop: '25vh',
+    paddingRight: '23vw',
+    alignSelf: 'center',
+  },
+  loadingText:{
+    fontFamily: 'Inter_900Black',
+    fontSize: '2vw',
+    color: '#B084CC'
+  },
+  loadedContainer: {
   }
 });
