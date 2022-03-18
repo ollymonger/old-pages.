@@ -107,7 +107,7 @@ export const styles = StyleSheet.create({
   },
   loadingText:{
     fontFamily: 'Inter_900Black',
-    fontSize: '2vw',
+    fontSize: '2rem',
     color: '#B084CC'
   },
   loadedContainer: {
