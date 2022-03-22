@@ -1,24 +1,39 @@
 import React, { CSSProperties, useEffect } from 'react';
-import { StyleProp, Text, TextStyle } from 'react-native';
+import { StyleProp, View,Text, TextStyle } from 'react-native';
 
-export const TextTyper: React.FC<{ title: string, time: number, style: StyleProp<TextStyle> }> = ({ title, time, style }) => {
+export const TextTyper: React.FC<{ title: string, time: number, style: StyleProp<TextStyle>, onComplete: (e:boolean) => void, enabled?:boolean }> = ({ title, time, style, onComplete, enabled }) => {
     const [typed, setTyped] = React.useState('');
     const [done, setDone] = React.useState(false);
-    
+    const [showLine, setShowLine] = React.useState(false);
+
     useEffect(() => {
-        const timer = setTimeout(() => {
+        const interval = setInterval(() => {
             if (typed.length < title.length) {
                 setTyped(typed + title[typed.length]);
-                setDone(false);
             } else {
+                onComplete(true);
                 setDone(true);
-                console.log("Typer is complete.");
+                clearInterval(interval);
             }
-        }, time);
-        return () => clearTimeout(timer);
-    }, [typed, title, time]);
+        }, time);       
+
+        // Clear the interval when the component is unmounted
+        return () => clearInterval(interval);
+    }, [typed]);
+
+
+    useEffect(() => {
+        if(done && enabled){
+            const interval = setInterval(() => {
+                setShowLine(!showLine);
+            }, 500);
+            return () => clearInterval(interval);
+        }
+    }, [done, showLine]);
 
     return (
-        <Text style={style}>{typed}</Text>
+        <View>
+            <Text style={style}>{typed} <Text style={{position:'absolute', }}>{showLine ? '|' : ''}</Text></Text>
+        </View>
     )
 };

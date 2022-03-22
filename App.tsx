@@ -75,13 +75,20 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#340580',
     color: '#fff',
-    height: '100%'
+    height: '100%',
+    // disable highlighting
+    WebkitTouchCallout: 'none',
+    WebkitUserSelect: 'none',
+    KhtmlUserSelect: 'none',
+    MozUserSelect: 'none',
+    msUserSelect: 'none',
+    userSelect: 'none',
   },
   header: {
     flex: 2,
     maxHeight: '7%',
     paddingLeft: '5%',
-    paddingTop: '2%',
+    paddingTop: '3.5vh',
     paddingRight: '5%',
   },
   headerTextColor: {
