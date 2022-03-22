@@ -36,6 +36,7 @@ export default function App() {
               {fakeLoad ? (  
                 <View style={styles.loadedContainer}>
                   <Routes>
+                    <Route path="/" element={<Home />} />
                   </Routes>
                 </View>
                 ) : (
