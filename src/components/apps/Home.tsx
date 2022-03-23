@@ -44,6 +44,17 @@ let title = text[random];
 
 const WebHome: React.FC<clientState> = (client) => {
     const [state, setState] = useState(false);
+    const heightAnimation = useRef(new Animated.Value(700)).current;
+
+    const animateHeader = () => {
+        Animated.timing(heightAnimation, {
+            toValue: 200,
+            duration: 300,
+            useNativeDriver: false
+        }).start((finished) => {
+
+        });
+    };
 
     const onComplete = (e: boolean) => {
         setState(e);
@@ -51,42 +62,52 @@ const WebHome: React.FC<clientState> = (client) => {
 
     return(
         <View style={{
-            justifyContent: "center",
-            alignItems: "center",
             backgroundColor: "#34057B",
             height:'90VH',
             marginTop:'1vh'         
         }}>
-            <TextTyper title={title} time={100} style={{ color: 'white', fontFamily: 'Inter_900Black', fontSize:'3rem'}} onComplete={onComplete} enabled />
-            {state ? <TextTyper title={"Thanks for checking out my site."} time={100} style={{color:'white', fontFamily:'Inter_300Light'}} onComplete={() => {}}/> : <></>}
+            <Animated.View style={{width:'100%', height:heightAnimation, justifyContent: "center", alignItems: "center", paddingTop:'1vh'}}>
+                <View style={{justifyContent:'flex-start', alignItems:'flex-start', width:'18vw'}}>  
+                    <Text style={{color:'white', fontFamily:'Inter_300Light'}}>Hi I'm Olly, a...</Text>
+                </View>
+                <TextTyper title={title} time={100} style={{ color: 'white', fontFamily: 'Inter_900Black', fontSize:'3rem'}} onComplete={onComplete} enabled />
+                {state ? <TextTyper title={"Thanks for checking out my site."} time={100} style={{color:'white', fontFamily:'Inter_300Light'}} onComplete={() => { animateHeader() }}/> : <></>}
+            </Animated.View>
         </View>
     );
 };
 
 
 const MobHome: React.FC<clientState> = (client) => {
-    // Requirements: 
-    /* - Seperate container to hold the content
-    - Title text, subtitle text, and a button
-    - Background of the container must fit in with the colour scheme*/
     const [state, setState] = useState(false);
+    const heightAnimation = useRef(new Animated.Value(500)).current;
+
+    const animateHeader = () => {
+        Animated.timing(heightAnimation, {
+            toValue: 150,
+            duration: 300,
+            useNativeDriver: false
+        }).start((finished) => {
+
+        });
+    };
 
     const onComplete = (e: boolean) => {
         setState(e);
     };
-    
 
-    return(
-        
+    return(        
         <View style={{
-            justifyContent: "center",
-            alignItems: "center",
             backgroundColor: "#34057B",
             height:'87vh'       
         }}>
-            <TextTyper title={title} time={100} style={{ color: 'white', fontFamily: 'Inter_900Black', fontSize:'2rem'}} onComplete={onComplete} enabled/>
-            
-            {state ? <TextTyper title={"Thanks for checking out my site."} time={100} style={{color:'white', fontFamily:'Inter_300Light'}} onComplete={() => {}}/> : <></>}
+            <Animated.View style={{width:'100%', height:heightAnimation, justifyContent: "center", alignItems: "center", paddingTop:'1vh'}}>
+                <View style={{justifyContent: "center", alignItems: "center"}}>  
+                    <Text style={{color:'white', fontFamily:'Inter_300Light'}}>Hi I'm Olly, a...</Text>
+                </View>
+                <TextTyper title={title} time={100} style={{ color: 'white', fontFamily: 'Inter_900Black', fontSize:'1.95rem'}} onComplete={onComplete} enabled />
+                {state ? <TextTyper title={"Thanks for checking out my site."} time={100} style={{color:'white', fontFamily:'Inter_300Light'}} onComplete={() => { animateHeader() }}/> : <></>}
+            </Animated.View>
         </View>
     );
 };
