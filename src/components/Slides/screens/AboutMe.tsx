@@ -1,6 +1,12 @@
 import React from "react";
 import { Text } from "react-native";
 
+// Slides must have a title component, stretching across the slide.
+// Must also have room at the top of the tile detailing how to navigate the slide.
+
+
+// This slide is to is the first screen, contains a photo and text about my journey as a developer.
+// In addition to this, it could also contain some of my URLs on the internet. youtube, ect
 export const AboutMe: React.FC<{}> = () => {
     return(
         <>

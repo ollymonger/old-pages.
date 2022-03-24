@@ -1,4 +1,4 @@
-import { Slide } from './screens/types'
+import { Slide } from './types'
 import { AboutMe } from './screens/AboutMe'
 import { LoremIsp, LoremIspTwo } from './screens/LoremIps'
 
