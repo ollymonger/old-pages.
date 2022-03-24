@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useRef } from 'react';
-import { ImageBackground, StyleSheet, Text, View, Image, ProgressBarAndroidBase, Animated } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View, Image, ProgressBarAndroidBase, Animated, Linking } from 'react-native';
 import { Provider } from 'react-redux';
 import { ClientTab } from './src/clientTab';
 import { store, useAppDispatch } from './src/redux/store';
@@ -34,9 +34,17 @@ export default function App() {
             }
             <View>
               {fakeLoad ? (  
-                <View style={styles.loadedContainer}>
+                <View>
                   <Routes>
+                    <Route path="/" element={<Home />} />
                   </Routes>
+                  <View style={styles.loadedContainer}>
+                    <Text style={{fontFamily:'Inter_300Light', color:'lightgray', fontSize:'0.75rem',}}>
+                      {'\u00A9'} 2022 yllo.cc | 
+                      <a href="https://github.com/ollymonger/ollymonger.github.io/" style={{color:'lightgray', textDecoration:'none'}}> Source</a> | 
+                      Built using Expo and React-Native
+                    </Text>
+                  </View>
                 </View>
                 ) : (
                 <View style={styles.loadingContainer}>
@@ -74,13 +82,22 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#340580',
     color: '#fff',
-    height: '100%'
+    // disable highlighting
+    WebkitTouchCallout: 'none',
+    WebkitUserSelect: 'none',
+    KhtmlUserSelect: 'none',
+    MozUserSelect: 'none',
+    msUserSelect: 'none',
+    userSelect: 'none',
+    overflow:'hidden',
+    height:'100%',
+    width:'100%'
   },
   header: {
-    flex: 2,
-    maxHeight: '7%',
+    flex: 1,
+    maxHeight: '5%',
     paddingLeft: '5%',
-    paddingTop: '2%',
+    paddingTop: '2vh',
     paddingRight: '5%',
   },
   headerTextColor: {
@@ -111,5 +128,11 @@ export const styles = StyleSheet.create({
     color: '#B084CC'
   },
   loadedContainer: {
+    color:'lightgray',
+    backgroundColor:'#340580',
+    width:'100%',
+    justifyContent:'center', alignItems:'center',
+    height:'6.5vh',
+    padding:'0.5vh'
   }
 });
