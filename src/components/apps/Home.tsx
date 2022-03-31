@@ -5,6 +5,8 @@ import { useAppSelector } from "../../redux/store";
 import { TextTyper } from "../TextTyper";
 import { GestureEvent, PanGestureHandler, PanGestureHandlerEventPayload } from "react-native-gesture-handler";
 import { SlideLookup } from "../Slides/index";
+import { AntDesign } from '@expo/vector-icons';
+
 
 export const Home = () => {
     const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -47,7 +49,9 @@ let title = text[random];
 const WebHome: React.FC<clientState> = (client) => {
     const [state, setState] = useState(false);
     const [page, setPage] = useState(0);
-    const heightAnimation = useRef(new Animated.Value(700)).current;
+    const [swipeState, setSwipeState] = useState(false);
+    const [swipeDirection, setSwipeDirection] = useState('right');
+    const heightAnimation = useRef(new Animated.Value(475)).current;
     const _opacity = useRef(new Animated.Value(0)).current;
 
     const animateHeader = () => {
@@ -95,6 +99,8 @@ const WebHome: React.FC<clientState> = (client) => {
 const MobHome: React.FC<clientState> = (client) => {
     const [state, setState] = useState(false);
     const [page, setPage] = useState(0);
+    const [swipeState, setSwipeState] = useState(false);
+    const [swipeDirection, setSwipeDirection] = useState('right');
     const heightAnimation = useRef(new Animated.Value(475)).current;
     const _opacity = useRef(new Animated.Value(0)).current;
 
@@ -120,21 +126,38 @@ const MobHome: React.FC<clientState> = (client) => {
     };
 
     const handleSwipe = (e:GestureEvent<PanGestureHandlerEventPayload>) => {
+        let startingX = 0;
         let localX = e.nativeEvent.translationX;
         let localPage = page;
-         if (e.nativeEvent.state === 5) {
-            if (localX > 0) {
-                localPage = page-1;
+        if(e.nativeEvent.state === 2){
+            startingX = localX;
+        }
+        if(e.nativeEvent.state === 4){
+            if(localX < startingX){
+                // user swiping left
+                setSwipeDirection('left');
+            }
+            if(localX > startingX){
+                // user swiping right
+                setSwipeDirection('right');
+            }
+            setSwipeState(true);
+        }
+        if (e.nativeEvent.state === 5) {
+            if (localX > 0 && localX - startingX > 125) {
+                localPage = page - 1;
                 if(localPage < 0) localPage = 2;
                 setPage(localPage);
                 if (page < 0) setPage(2);
-            } else {
-                localPage = page+1;
+            }
+            if(localX < 0 && startingX - localX > 125) {
+                localPage = page + 1;
                 if(localPage > 2) localPage = 0;
                 setPage(localPage);
-                if (page > 1) setPage(0);
+                if (page > 2) setPage(0);
             }
-         }
+            setSwipeState(false);
+        }
     }
 
     const SlideToShow = () => {
@@ -145,7 +168,6 @@ const MobHome: React.FC<clientState> = (client) => {
         const Slide = SlideLookup[asString];
         return <Slide />;
     }
-
 
     return(
             <View style={{
@@ -164,6 +186,9 @@ const MobHome: React.FC<clientState> = (client) => {
                         <Animated.View style={{ width:'99vw', height:client.height <= 750 ? '68vh' : '73vh',backgroundColor:'#34056A', 
                             opacity:_opacity,                
                             borderTopLeftRadius: 50 / 2, borderTopRightRadius: 50 / 2, marginLeft:'0.5vw'}}>
+                                {swipeState ? <View style={{position:'absolute'}}>
+                                    <AntDesign name={swipeDirection === 'right' ? "stepbackward" : "stepforward"} size={24} color="lightgray" style={{marginLeft:'45vw'}} />
+                                </View> : <></>}
                                 <SlideToShow/>
                         </Animated.View>
                     </PanGestureHandler>

@@ -8,6 +8,7 @@ import { Link, NativeRouter, Route, Routes } from 'react-router-native';
 import { useFonts, Inter_900Black, Inter_300Light } from '@expo-google-fonts/inter';
 import { ProgressBar, Provider as PaperProvider } from 'react-native-paper';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import { AntDesign } from '@expo/vector-icons';
 
 import { Home } from './src/components/apps/Home';
 
