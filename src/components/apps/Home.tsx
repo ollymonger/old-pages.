@@ -117,7 +117,7 @@ const WebHome: React.FC<clientState> = (client) => {
                 <TextTyper title={title} time={100} style={{ color: 'white', fontFamily: 'Inter_900Black', fontSize:'3rem'}} onComplete={onComplete} enabled />
                 {state ? <TextTyper title={"Thanks for checking out my site."} time={100} style={{color:'white', fontFamily:'Inter_300Light'}} onComplete={() => { animateHeader(); animateContent(); }}/> : <></>}
             </Animated.View>
-            {page === 1 ? <WorkCard data={data}/> : <></>}
+            {page === 1 ? <WorkCard /> : <></>}
 
         </View>
     );
