@@ -6,6 +6,7 @@ import { TextTyper } from "../TextTyper";
 import { GestureEvent, PanGestureHandler, PanGestureHandlerEventPayload } from "react-native-gesture-handler";
 import { SlideLookup } from "../Slides/index";
 import { AntDesign } from '@expo/vector-icons';
+import { WorkCard } from "../WorkCard/WorkCard";
 
 
 export const Home = () => {
@@ -23,20 +24,10 @@ export const Home = () => {
         useNativeDriver: false
         }).start();
     };
-
-    if (client.device == "mobile") return (
-        <Animated.View style={[{ opacity: fadeAnim }]}>
-            {MobHome(client)}
-        </Animated.View>
-    );
-    else if(client.height > 600 && client.width > 640) return (
+    
+    return (
         <Animated.View style={[{ opacity: fadeAnim }]}>
             {WebHome(client)}
-        </Animated.View>
-    );
-    else return (
-        <Animated.View style={[{ opacity: fadeAnim }]}>
-            {MobHome(client)}
         </Animated.View>
     );
 };
@@ -60,7 +51,10 @@ const WebHome: React.FC<clientState> = (client) => {
             duration: 300,
             useNativeDriver: false
         }).start((finished) => {
-
+            if(finished.finished){
+                setPage(1);
+                return;
+            }
         });
     };
     
@@ -74,9 +68,7 @@ const WebHome: React.FC<clientState> = (client) => {
 
     const onComplete = (e: boolean) => {
         setState(e);
-    };    
-    
-   
+    };
 
     return(
         <View style={{
@@ -91,6 +83,8 @@ const WebHome: React.FC<clientState> = (client) => {
                 <TextTyper title={title} time={100} style={{ color: 'white', fontFamily: 'Inter_900Black', fontSize:'3rem'}} onComplete={onComplete} enabled />
                 {state ? <TextTyper title={"Thanks for checking out my site."} time={100} style={{color:'white', fontFamily:'Inter_300Light'}} onComplete={() => { animateHeader(); animateContent(); }}/> : <></>}
             </Animated.View>
+            {page === 1 ? <WorkCard/> : <></>}
+
         </View>
     );
 };
