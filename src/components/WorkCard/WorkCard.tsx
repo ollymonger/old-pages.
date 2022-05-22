@@ -4,44 +4,9 @@ import { ScrollView } from "react-native-gesture-handler";
 import { useAppSelector } from "../../redux/store";
 import { ItemProps, RenderItem } from "./Item";
 
-export const WorkCard: React.FC<{}> = () => {
+export const WorkCard: React.FC<{data: ItemProps[]}> = ({data}) => {
     const [page, setPage] = React.useState(0);
     let client = useAppSelector(state => state.client)
-
-    const data: ItemProps[] = [
-        {
-            icon:'smileo',
-            title: "aboutme",
-            description: "A website for a startup company Page 1",
-            onPress: () => {
-                setPage(0);
-            }
-        },
-        {
-            icon:'smileo',
-            title: "work",
-            description: "A website for a startup company 2",
-            onPress: () => {
-                setPage(1);
-            }
-        },
-        {
-            icon:'smileo',
-            title: "hobbies",
-            description: "A website for a startup company 3",
-            onPress: () => {
-                setPage(2);
-            }
-        },
-        {
-            icon:'smileo',
-            title: "extra",
-            description: "A website for a startup company 4",
-            onPress: () => {
-                setPage(3);
-            }
-        }
-    ];
 
     if(client.device === "web" && client.width > 600 && client.height > 400) {
         return (

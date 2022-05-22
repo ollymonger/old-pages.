@@ -7,6 +7,7 @@ import { GestureEvent, PanGestureHandler, PanGestureHandlerEventPayload } from "
 import { SlideLookup } from "../Slides/index";
 import { AntDesign } from '@expo/vector-icons';
 import { WorkCard } from "../WorkCard/WorkCard";
+import { ItemProps } from "../WorkCard/Item";
 
 
 export const Home = () => {
@@ -40,10 +41,43 @@ let title = text[random];
 const WebHome: React.FC<clientState> = (client) => {
     const [state, setState] = useState(false);
     const [page, setPage] = useState(0);
-    const [swipeState, setSwipeState] = useState(false);
-    const [swipeDirection, setSwipeDirection] = useState('right');
     const heightAnimation = useRef(new Animated.Value(475)).current;
     const _opacity = useRef(new Animated.Value(0)).current;
+
+    const data: ItemProps[] = [
+        {
+            icon:'smileo',
+            title: "aboutme",
+            description: "A website for a startup company Page 1",
+            onPress: () => {
+                setPage(0);
+            }
+        },
+        {
+            icon:'smileo',
+            title: "work",
+            description: "A website for a startup company 2",
+            onPress: () => {
+                setPage(1);
+            }
+        },
+        {
+            icon:'smileo',
+            title: "hobbies",
+            description: "A website for a startup company 3",
+            onPress: () => {
+                setPage(2);
+            }
+        },
+        {
+            icon:'smileo',
+            title: "extra",
+            description: "A website for a startup company 4",
+            onPress: () => {
+                setPage(3);
+            }
+        }
+    ];
 
     const animateHeader = () => {
         Animated.timing(heightAnimation, {
@@ -83,7 +117,7 @@ const WebHome: React.FC<clientState> = (client) => {
                 <TextTyper title={title} time={100} style={{ color: 'white', fontFamily: 'Inter_900Black', fontSize:'3rem'}} onComplete={onComplete} enabled />
                 {state ? <TextTyper title={"Thanks for checking out my site."} time={100} style={{color:'white', fontFamily:'Inter_300Light'}} onComplete={() => { animateHeader(); animateContent(); }}/> : <></>}
             </Animated.View>
-            {page === 1 ? <WorkCard/> : <></>}
+            {page === 1 ? <WorkCard data={data}/> : <></>}
 
         </View>
     );
